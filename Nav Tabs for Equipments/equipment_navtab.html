@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Navtab</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" type="text/css" href="equipment_navtab.css">
+
+<link rel="stylesheet" type="text/css" href="sidebar.css">
+
+<link rel="stylesheet" type="text/css" href="main.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="script_navtab.js"> </script>
+</head>
+
+<body>
+
+<!--For Sidebar -->
+
+
+<div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header" >
+                    <h3>NAVIGATION</h3>
+                </div>
+
+                <ul class="list-unstyled components">
+                    
+                    <li >
+                        <a href="#">Home</a>
+
+                    </li>
+                    <li>
+                        <a href="#">Master</a>
+                    </li>
+                    <li>
+                        <a href="equipment_navtab.html" style="background-color: #3D6765" >Equipments</a>
+
+                    </li>
+                    <li >
+                        <a href="add.html">Manage users</a>
+
+                    </li>
+                    <li>
+                        <a href="#">Sign Out</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+
+
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+
+                        
+                    </div>
+                </nav>
+
+                
+                
+
+                
+
+                
+            </div>
+
+
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                     $(this).toggleClass('active');
+                 });
+             });
+         </script>
+
+<!-- Sidebar Ends here -->
+
+
+<!-- Navtab starts here -->
+
+<div class="container">
+    <!-- For demo purpose -->
+    <div class="row py-5">
+        <div class="col-lg-9 mx-auto text-white text-center">
+            <h1 class="display-4">Equipment details</h1>
+            <p class="lead mb-0">Here are the equipments details.</p>
+            
+        </div>
+    </div><!-- End -->
+
+<div class="row">
+        <div class="col-lg-9 mx-auto">
+            <!-- Accordion -->
+            <div id="accordionNavtab" class="accordion shadow">
+
+                <!-- Accordion item 1 -->
+                <div class="card">
+
+
+				<div class="bs-example">
+				    <ul id="myTab" class="nav nav-tabs">
+				        <li class="nav-item">
+				            <a href="#computers" class="nav-link active" data-toggle="tab">Computers</a>
+				        </li>
+				        <li class="nav-item">
+				            <a href="#printers" class="nav-link" data-toggle="tab">Printers</a>
+				        </li>
+				        <li class="nav-item">
+				            <a href="#projectors" class="nav-link" data-toggle="tab">Projectors</a>
+				        </li>
+				        <li class="nav-item">
+				        	<a href="#laptops" class="nav-link" data-toggle="tab">Laptops</a>
+				        </li>
+				    </ul>
+				    <div class="tab-content">
+				        <div class="tab-pane fade show active" id="computers">
+				            <h4 class="mt-2">Home tab content</h4>
+				            <p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+				        </div>
+				        <div class="tab-pane fade" id="printers">
+				            <h4 class="mt-2">Profile tab content</h4>
+				            <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
+				        </div>
+				        <div class="tab-pane fade" id="projectors">
+				            <h4 class="mt-2">Messages tab content</h4>
+				            <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis.</p>
+				        </div>
+				        <div class="tab-pane fade" id="laptops">
+				            <h4 class="mt-2">Messages tab content</h4>
+				            <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis.</p>
+				        </div>
+				    </div>
+				    <hr>
+				    
+				    </div>
+			</div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Nav Tab ends here -->
+
+
+</body>
+</html>                            
