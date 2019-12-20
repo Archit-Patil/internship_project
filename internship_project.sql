@@ -1,7 +1,6 @@
 CREATE TABLE `labs` (
-  `sr_no` int AUTO_INCREMENT,
-  `lab_id` varchar(255) PRIMARY KEY,
-  `lab_name` varchar(255),
+  `lab_id` varchar(10) PRIMARY KEY,
+  `lab_name` varchar(50),
   `description` text,
   `date` date,
   `quantity` int,
@@ -9,20 +8,19 @@ CREATE TABLE `labs` (
   `ammount` decimal
 );
 
-CREATE TABLE `master_table` (
-  `sr_no` int AUTO_INCREMENT,
-  `computer_id` varchar(255),
-  `laptop_id` varchar(255),
-  `projector_id` varchar(255),
-  `printer_id` varchar(255),
-  `user_id` int,
+CREATE TABLE `mapping_table` (
+  `computer_id` varchar(10),
+  `laptop_id` varchar(10),
+  `projector_id` varchar(10),
+  `printer_id` varchar(10),
+  `user_id` varchar(10),
+  `lab_id` varchar(10),
   `date` date,
   `mode` boolean
 );
 
 CREATE TABLE `computer` (
-  `sr_no` int AUTO_INCREMENT,
-  `computer_id` varchar(255) PRIMARY KEY,
+  `computer_id` varchar(10) PRIMARY KEY,
   `description` text,
   `date_of_purchase` date,
   `bill_no` varchar(255),
@@ -32,8 +30,7 @@ CREATE TABLE `computer` (
 );
 
 CREATE TABLE `laptop` (
-  `sr_no` int AUTO_INCREMENT,
-  `laptop_id` varchar(255) PRIMARY KEY,
+  `laptop_id` varchar(10) PRIMARY KEY,
   `description` text,
   `date_of_purchase` date,
   `bill_no` varchar(255),
@@ -43,8 +40,7 @@ CREATE TABLE `laptop` (
 );
 
 CREATE TABLE `printer` (
-  `sr_no` int AUTO_INCREMENT,
-  `printer_id` varchar(255) PRIMARY KEY,
+  `printer_id` varchar(10) PRIMARY KEY,
   `description` text,
   `date_of_purchase` date,
   `bill_no` varchar(255),
@@ -54,8 +50,7 @@ CREATE TABLE `printer` (
 );
 
 CREATE TABLE `projector` (
-  `sr_no` int AUTO_INCREMENT,
-  `projector_id` varchar(255) PRIMARY KEY,
+  `projector_id` varchar(10) PRIMARY KEY,
   `description` text,
   `date_of_purchase` date,
   `bill_no` varchar(255),
@@ -65,18 +60,20 @@ CREATE TABLE `projector` (
 );
 
 CREATE TABLE `user` (
-  `user_id` int PRIMARY KEY AUTO_INCREMENT,
-  `user_name` varchar(255),
-  `email` varchar(255),
+  `user_id` varchar(10) PRIMARY KEY,
+  `user_name` varchar(50),
+  `email` varchar(100),
   `password` varchar(255)
 );
 
-ALTER TABLE `computer` ADD FOREIGN KEY (`computer_id`) REFERENCES `master_table` (`computer_id`);
+ALTER TABLE `computer` ADD FOREIGN KEY (`computer_id`) REFERENCES `mapping_table` (`computer_id`);
 
-ALTER TABLE `laptop` ADD FOREIGN KEY (`laptop_id`) REFERENCES `master_table` (`laptop_id`);
+ALTER TABLE `laptop` ADD FOREIGN KEY (`laptop_id`) REFERENCES `mapping_table` (`laptop_id`);
 
-ALTER TABLE `projector` ADD FOREIGN KEY (`projector_id`) REFERENCES `master_table` (`projector_id`);
+ALTER TABLE `projector` ADD FOREIGN KEY (`projector_id`) REFERENCES `mapping_table` (`projector_id`);
 
-ALTER TABLE `printer` ADD FOREIGN KEY (`printer_id`) REFERENCES `master_table` (`printer_id`);
+ALTER TABLE `printer` ADD FOREIGN KEY (`printer_id`) REFERENCES `mapping_table` (`printer_id`);
 
-ALTER TABLE `master_table` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `labs` ADD FOREIGN KEY (`lab_id`) REFERENCES `mapping_table` (`printer_id`);
+
+ALTER TABLE `mapping_table` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
