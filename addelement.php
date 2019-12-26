@@ -32,7 +32,7 @@ if($con)
         $set3 = mysqli_query($con,$query3);
         if($set3)
         {
-            header("Location: collapse_master.php");
+            header("Location: equipment.php");
         }
         else
         {
@@ -80,11 +80,11 @@ else
             <?php } ?> 
 
             <?php if($value==1) {?> 
-            	<a href="collapse_master.php"><button type="button" class=" btn btn-success">Return</button></a>
+            	<a href="equipment.php"><button type="button" class=" btn btn-success">Return</button></a>
        		<?php } ?> 
 
        		<?php if($value==0) {?> 
-            	<a href="collapse_master.php"><button type="button" class=" btn btn-info">Return</button></a>
+            	<a href="equipment.php"><button type="button" class=" btn btn-info">Return</button></a>
        		<?php } ?>
             
     	</div>

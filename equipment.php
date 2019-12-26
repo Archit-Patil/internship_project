@@ -1,23 +1,22 @@
 <?php 
 session_start();
 //error_reporting(E_ERROR | E_WARNING | E_PARSE);
-if(isset($_POST['nameofproduct']))
+if(isset($_POST['labnumber']))
 {
-    $nameofproduct = $_POST['nameofproduct'];
-    $_SESSION['nameofproduct'] = $nameofproduct;
+    $labnumber = $_POST['labnumber'];
+    $_SESSION['labnumber'] = $labnumber;
 }
 else
 {
-    $nameofproduct = $_SESSION['nameofproduct'];
+    $labnumber = $_SESSION['labnumber'];
 }
-
 $lab = "labs";
 $table="product";
 $con = new mysqli("localhost","root","root","csm");
 
 if($con)
 {
-    $query1  = "SELECT * FROM $table INNER JOIN $lab WHERE $table.labno = $lab.id AND $table.name='$nameofproduct';";
+    $query1  = "SELECT * FROM $table INNER JOIN $lab WHERE $table.labno = $lab.id AND $table.labno='$labnumber';";
     $result1 = mysqli_query($con,$query1);
     $datas   = array();
     $serial  = array();
@@ -128,7 +127,7 @@ if($con)
 <!-- <?php! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! Edit() here  ! ! ! ! ! ! ! ! ! !  ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !?> -->
 <!-- <?php! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! Edit() here  ! ! ! ! ! ! ! ! ! !  ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !?> -->
 <!-- <?php! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! Edit() here  ! ! ! ! ! ! ! ! ! !  ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !?> -->
-                    <div class="row align-items-center" style="max-width: 1380px"><h1 class="col-11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $nameofproduct; ?></h1>  <a class="col-1" style="color:yellow" href="index.html"><h3 title="Return to main page">&#8920;&nbsp;</h3></a></div>
+                    <div class="row align-items-center" style="max-width: 1380px;padding-top: 60px"><h1 class="col-11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $labnumber; ?></h1>  <a class="col-1" style="color:yellow" href="collapse_master.php"><h3 title="Return to main page">&#8920;&nbsp;</h3></a></div>
                     <p style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of elements:<?php echo $count ?> </p>     
                     <div class="row ">
 
@@ -159,10 +158,10 @@ if($con)
                                             <td><textarea class="form-control" rows="1.5" readonly><?php echo $desc[$i];   ?></textarea></td>
                                             <td><?php echo $status[$i]; ?></td>
                                             <td>
-                                                <input class="btn btn-info" id="<?php echo $serial[$i] ?>" style="width:60px;height:40px;" title="Shift to another lab" href="#comp" onclick="shift(this)" value="Shift" readonly>
+                                                <input class="btn btn-info" id="<?php echo $serial[$i] ?>" style="width:60px;height:40px;" title="Shift to another lab"  onclick="shift(this)" value="Shift" readonly>
                                                 <form action="shift.php" method="POST">
 
-                                                    <input id="labno"   name="labno"     style="display:none;"  value="<?php echo $lab         ?>">       
+                                                    <input id="labno"   name="labno"   style="display:none;"  value="<?php echo $lab         ?>">       
                                                     <input id="table"   name="table"   style="display:none;"  value="<?php echo $table       ?>">       
                                                     <input id="serial"  name="serial"  style="display:none;"  value="<?php echo $serial[$i]; ?>">
                                                     <input id="name"    name="name"    style="display:none;"  value="<?php echo $name[$i];   ?>">
@@ -181,7 +180,11 @@ if($con)
                                                                 <select class="form-control" name="target" id="target">
                                                                     <option value="L01" > lab 1 </option>
                                                                     <option value="L02" > lab 2 </option>
+                                                                    <option value="L03" > lab 3 </option>
+                                                                    <option value="L04" > lab 4 </option>
+                                                                    <option value="L05" > lab 5 </option> 
                                                                 </select> 
+
                                                             </div>
                                                             <div class="form-group text-center"><button type="submit" class="btn btn-info hidden" id="buttontobshown/<?php echo $serial[$i] ?>"  title="Shift to another lab" onclick="shift()">Shift</button> 
                                                             </div>
@@ -199,7 +202,7 @@ if($con)
                                                     <input id="serial"  name="serial"  style="display:none"  value="<?php echo $serial[$i];  ?>">
                                                     <input id="table"   name="table"   style="display:none"  value="<?php echo $table;       ?>">
 
-                                                    <a href="#comp"><button type="submit"  class="btn btn-warning" title="Edit Details and Status" style=";width:60px;height:40px;font-size: 10px">Change Status</button></a>
+                                                    <a ><button type="submit"  class="btn btn-warning" title="Edit Details and Status" style=";width:60px;height:40px;font-size: 10px">Change Status</button></a>
 
                                                 </form>
                                             </td>
@@ -219,8 +222,7 @@ if($con)
                                     <?php } ?>          
                                 </tbody>
                             </table>
-
-                            <a href="#comp" style="text-decoration: none;"><div class="card border-success mx-auto text-center  justify-content-center"  style="height:50px" onclick="add()">Add Element</div></a>  
+                            <a  style="text-decoration: none;"><div class="card border-success mx-auto text-center  justify-content-center"  style="height:50px" onclick="add()">Add Element</div></a>  
 
                             <br />
 
@@ -231,23 +233,25 @@ if($con)
                                     <input id="table" name="table" style="display:none" value="<?php echo $table ?>">
                                     <form class="form-signin" style="max-width:1000px" action="addelement.php" required method="POST">                                        
 
-                                        <div class="row">
-
-                                            <div class="col-6 form-group">
+                                        
+                                            <!-- <div class="form-group">
                                                 <label>Lab No:</label>
                                                 <select  type="int"      name="labno"    id="labno"  required  class="form-control">
                                                     <option value="L01">L01</option>
                                                     <option value="L02">L02</option>
                                                 </select>
-                                            </div>
+                                            </div> -->
 
                                             <input type="text" name="table" class="hidden" value="<?php echo $table; ?>">
-                                            <input type="text" name="name" class="hidden" value="<?php echo $nameofproduct; ?>">
+                                            <input type="text" name="labno" class="hidden" value="<?php echo $labnumber ?>">
+                                           
+                                            <div class="row">
+
                                             <div class="col-6 form-group">
                                                 <label>Serial No:</label>
-                                                <input  type="int"      name="serial"    id="serial"  required  class="form-control">
+                                                <input  type="text"      name="serial"    id="serial"  required  class="form-control">
                                             </div>
-                                            <!-- <div class="col-6 form-group">
+                                            <div class="col-6 form-group">
                                                 <label>Name:</label>
                                                 <select name="name"    id="name"    required  class="form-control">
                                                     <option value="Computer"  >Computer  </option>
@@ -255,7 +259,7 @@ if($con)
                                                     <option value="Printer"   >Printer   </option>
                                                     <option value="Projector" >Projector </option>
                                                 </select>
-                                            </div> -->
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col form-group">
@@ -285,7 +289,7 @@ if($con)
                                         
                                     </form>
                                 </div>
-                            </div>
+                            </div> 
 
                             <br /><br />
 
